@@ -1,0 +1,17 @@
+h1{
+    background-color: blue;
+    text-decoration:double;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 50px;
+    border-style: double;
+    box-shadow: linear-gradient(rgb(32, 32, 45));
+    box-decoration-break: s;
+}
+
+h1:hover{
+    background-color: linear-gradient(rgb(181, 181, 202));
+    text-decoration: dotted;
+    text-align: center;
+    text-transform: uppercase;
+}
