@@ -1,19 +1,47 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+function App() {
 
-function listApp(){
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
 
-  const [task,setTask]=useState("Studyreact");
+  const addTask = () => {
+    setTasks([...tasks, task]);
+    setTask("");
+  };
+
+  const deleteTask = (index) => {
+    const newTasks = tasks.filter((_, i) => i !== index);
+    setTasks(newTasks);
+  };
+
+  
 
   return (
-    <div className='app'>
-      <div className='task'>
-        <h1>Dynamic List App</h1>
-        <form action="text"><h3>Enter task:{task}</h3></form>
-        <button onClick={() => ("Complete assignment")}></button>
-      </div>
-    </div>
-  )
-}
+  <div className="container">
 
-export default listApp
+    <h1>Task List</h1>
+
+    <div className="input-section">
+      <input
+        type="text"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+        placeholder="Enter a task..."
+      />
+      <button onClick={addTask}>Add</button>
+    </div>
+
+    <ul className="task-list">
+      {tasks.map((t, index) => (
+        <li key={index} className="task-item">
+          <span>{t}</span>
+          <button onClick={() => deleteTask(index)}>Delete</button>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+  );
+}
+export default App;
