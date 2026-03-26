@@ -1,24 +1,54 @@
-document.getElementById("myform").addEventListener("submit", function(event) {
+const form = document.getElementById("form");
 
-event.preventDefault(); 
+form.addEventListener("submit", function(e) {
+  e.preventDefault(); 
 
-let name = document.getElementById("name").value;
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
+  // get values
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  let confirmPassword = document.getElementById("confirmPassword").value;
 
-let message = document.getElementById("message");
+  // error elements
+  let nameError = document.getElementById("nameError");
+  let emailError = document.getElementById("emailError");
+  let passError = document.getElementById("passError");
+  let confirmError = document.getElementById("confirmError");
 
-if (name === "" || email === "" || password === "") {
-    alert("Please fill in all fields!");
-}
-else if (!email.includes("@")) {
-    alert("Please enter a valid email address!");
-}
-else if (password.length < 6) {
-    alert("Password must be at least 6 characters long!");
-}
-else {
+  // reset errors
+  nameError.textContent = "";
+  emailError.textContent = "";
+  passError.textContent = "";
+  confirmError.textContent = "";
+
+  let isValid = true;
+
+  // 1. Name validation
+  if (name === "") {
+    alert("Name cannot be empty");
+    isValid = false;
+  }
+
+  // 2. Email validation
+  if (!email.includes("@")) {
+    alert("Email must contain @")
+    isValid = false;
+  }
+
+  // 3. Password length
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters")
+    isValid = false;
+  }
+
+  // 4. Password match
+  if (password !== confirmPassword) {
+    alert("Passwords do not match")
+    isValid = false;
+  }
+
+  // success
+  if (isValid) {
     alert("Form submitted successfully!");
-    message.textContent = `Welcome, ${name}! Your email is ${email}.`;
-}
+  }
 });

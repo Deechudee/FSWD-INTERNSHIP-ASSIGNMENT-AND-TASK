@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 // eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
+export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (id) => {
-    setCart(cart.filter(item => item.id !== id));
+    setCart(cart.filter((item) => item.id !== id));
   };
 
   return (
@@ -19,4 +19,4 @@ export const CartProvider = ({ children }) => {
       {children}
     </CartContext.Provider>
   );
-};
+}
