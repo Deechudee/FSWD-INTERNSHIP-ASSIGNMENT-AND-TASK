@@ -1,17 +1,50 @@
-h1{
-    background-color: blue;
-    text-decoration:double;
-    text-align: center;
-    text-transform: uppercase;
-    border-radius: 50px;
-    border-style: double;
-    box-shadow: linear-gradient(rgb(32, 32, 45));
-    box-decoration-break: s;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-h1:hover{
-    background-color: linear-gradient(rgb(181, 181, 202));
-    text-decoration: dotted;
-    text-align: center;
-    text-transform: uppercase;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px 20px;
+}
+
+
+.logo {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+    padding: 10px 0;
+  }
 }
