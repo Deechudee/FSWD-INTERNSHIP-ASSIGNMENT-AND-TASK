@@ -1,63 +1,84 @@
-const express=require("express");
-const app=express();
+const express = require("express");
+const app = express();
 
+const PORT = 3000;
+
+// middleware
 app.use(express.json());
 
-const PORT=3000
-
-let products=[
-    {id:1,name:"Laptop",price:50000},
-    {id:2,name:"Mobile",price:20000},
-    {id:3,name:"TV",price:60000},
-    {id:4,name:"Car",price:200000}
+// =======================
+// 📦 PRODUCTS DATA
+// =======================
+let products = [
+  { id: 1, name: "Laptop", price: 50000 },
+  { id: 2, name: "Phone", price: 20000 }
 ];
 
-app.get("/products",(req,res)=> {
-    res.status(200).json(products);
+// =======================
+// 📌 ROUTES (CRUD)
+// =======================
+
+// 1️⃣ GET all products
+app.get("/products", (req, res) => {
+  res.json(products);
 });
 
-app.post("/products",(req,res)=>{
-     const { name }= req.body;
-     const { price }=req.body;
+// 2️⃣ POST new product
+app.post("/products", (req, res) => {
+  const { name, price } = req.body;
 
-     if (!name) {
-        return res.status(400).json({message:"Name is required"});
-     }
-     let newProduct={
-        id:products.length+1,
-        name:name,
-        price:price
-     }
-     products.push(newProduct);
-     res.status(201).json(newProduct);
+  const newProduct = {
+    id: products.length+1,
+    name,
+    price
+  };
+
+  products.push(newProduct);
+
+  res.json({
+    message: "Product added",
+    product: newProduct
+  });
 });
 
+// 3️⃣ PUT update product
 app.put("/products/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const { name } = req.body;
-  const { price } = req.body;
+  const { name, price } = req.body;
 
-  const product = products.find(u => u.id === id);
+  const product = products.find(p => p.id === id);
 
   if (!product) {
-    return res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "Product not found" });
   }
 
   product.name = name;
   product.price = price;
-  res.status(200).json(product);
+
+  res.json({
+    message: "Product updated",
+    product
+  });
 });
 
-// DELETE → remove user
+// 4️⃣ DELETE product
 app.delete("/products/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
-  products = products.filter(u => u.id !== id);
+  const index = products.findIndex(p => p.id === id);
 
-  res.status(200).json({ message: "User deleted" });
+  if (index === -1) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+
+  products.splice(index, 1);
+
+  res.json({ message: "Product deleted" });
 });
 
-app.listen(PORT,()=>{
-    console.log(`Server running at http://localhost:${PORT}`);
-})
-
+// =======================
+// 🚀 START SERVER
+// =======================
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
