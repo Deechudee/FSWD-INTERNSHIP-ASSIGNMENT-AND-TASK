@@ -48,6 +48,6 @@ This repository contains all assignments and tasks completed during my Full Stac
 * Git & GitHub
 * Full Stack Development
 
-👩‍💻 Author
- Deekshitha
+👩‍💻 Author : 
+ Deekshitha - 
  Full Stack Web Development Intern
