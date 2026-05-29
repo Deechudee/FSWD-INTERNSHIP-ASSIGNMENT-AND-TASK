@@ -34,32 +34,33 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <h1>Weather Dashboard 🌦️</h1>
+    <div className="container">
+        <h1>🌦 Weather App</h1>
 
-      <input
-        type="text"
-        placeholder="Enter city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
+        <input
+          type="text"
+          className="input"
+          placeholder="Enter city"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
 
-      <button onClick={fetchWeather}>Get Weather</button>
+        <button className="button" onClick={fetchWeather}>
+          Get Weather
+        </button>
 
-      {/* Loading */}
-      {loading && <p>Loading...</p>}
+        {loading && <p>⏳ Loading...</p>}
+        {error && <p className="error">{error}</p>}
 
-      {/* Error */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {/* Weather Data */}
-      {weather && (
-        <div>
-          <h2>{weather.name}</h2>
-          <p>🌡️ Temp: {weather.main.temp}°C</p>
-          <p>☁️ {weather.weather[0].description}</p>
-        </div>
-      )}
+        {weather && (
+          <div className="card">
+            <h2>{weather.name}</h2>
+            <p>🌡 Temp: <b>{weather.main.temp}°C</b></p>
+            <p>💧 Humidity: {weather.main.humidity}%</p>
+            <p>🌬 Wind: {weather.wind.speed} m/s</p>
+            <p>🌥 {weather.weather[0].description}</p>
+          </div>
+        )}
     </div>
   );
 }
